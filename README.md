@@ -1,6 +1,6 @@
 ## `Ollama` : [Source](https://ollama.com/library/llama3.2)
 
-![image](https://github.com/user-attachments/assets/185197de-e154-4a2d-8a32-057752257b21)
+[![image](https://github.com/user-attachments/assets/b7ae12bf-3e37-4a07-8425-6d71cd5e4430)](https://monkey-related-kangaroo.ngrok-free.app/)
 
     Install:
         curl -fsSL https://ollama.com/install.sh | sh

@@ -4,18 +4,6 @@ import subprocess
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
-def chat_model(request):
-    if request.method == 'POST':
-        user_message = request.POST.get('message')
-        ChatMessage.objects.create(sender='user', message=user_message)
-
-        # Example bot response
-        bot_response = f"Echo: {user_message}"
-        ChatMessage.objects.create(sender='bot', message=bot_response)
-
-        return JsonResponse({"response": bot_response})
-    return JsonResponse({"error": "Invalid method"}, status=400)
-
 def chat_page(request):
     return render(request, 'chat/index.html')
 
@@ -32,6 +20,7 @@ def chat_api(request):
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
+                encoding="utf-8",
                 text=True,
             )
             stdout, stderr = process.communicate(input=user_message)

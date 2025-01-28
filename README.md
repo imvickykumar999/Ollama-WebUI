@@ -6,6 +6,7 @@
         curl -fsSL https://ollama.com/install.sh | sh
         
     Run:
+        ollama serve
         ollama run llama3.2
         
     More:

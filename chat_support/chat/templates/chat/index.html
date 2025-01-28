@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@imvickykumar999 ChatBot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #EDEDED;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        #chat-container {
+            width: 60%;
+            max-width: 600px;
+            background: #FFFFFF;
+            border: 1px solid #D9D9D9;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+            position: relative;
+        }
+
+        /* Header Styling */
+        h2 {
+            text-align: center;
+            margin: 0;
+            padding: 15px;
+            color: #ffffff;
+            background: #042e6f;
+            font-weight: 600;
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Messages Container Styling */
+        #messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 15px;
+            background: #ECE5DD;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Individual Message Styling */
+        .message {
+            margin: 8px 0;
+            padding: 8px 12px;
+            max-width: 60%;
+            word-wrap: break-word;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* User Message Styling */
+        .user {
+            background-color: #042e6f;
+            color: #ffffff;
+            align-self: flex-end;
+            border-radius: 15px 15px 0 15px;
+            justify-content: flex-end;
+            margin-right: 10px;
+            margin-left: auto;
+            padding: 8px 12px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Bot Message Styling */
+        .bot {
+            background-color: #ffffff;
+            color: #333;
+            align-self: flex-start;
+            border-radius: 15px 15px 15px 0;
+            border: 1px solid #D9D9D9;
+            justify-content: flex-start;
+            margin-left: 10px;
+            padding: 8px 12px;
+            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Input Field Styling */
+        #user-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-top: 1px solid #D9D9D9;
+            border-radius: 20px;
+            background: #F2F2F2;
+            color: #333;
+            font-size: 14px;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        #user-input::placeholder {
+            color: #999;
+        }
+
+        /* Button Styling */
+        button {
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Send Button & Voice Input Button Styling */
+        #send-button, #voice-input {
+            background-color: #042e6f;
+            color: #ffffff;
+            margin: 5px;
+            width: 40px;
+            height: 40px;
+        }
+
+        #send-button:hover, #voice-input:hover {
+            background-color: #042e6f;
+        }
+
+        /* Icon Size Adjustment */
+        #voice-input i, #send-button i {
+            font-size: 20px;
+        }
+
+        /* Input Container Styling */
+        #input-container {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 10px;
+            border-top: 1px solid #D9D9D9;
+        }
+
+        /* Loading Spinner Styling */
+        .loading-spinner {
+            display: inline-block;
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #042e6f;
+            width: 12px;
+            height: 12px;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .icon {
+            margin-right: 8px;
+            font-size: 18px;
+            margin-top:auto;
+        }
+        .clickable-link {
+            color: #0000EE;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <h2>@imvickykumar999 ChatBot</h2>
+        <div id="messages">
+            <div class="message bot">
+                <i class="fas fa-cogs icon"></i>
+                <span>Hello! How can I assist you today?</span>
+            </div>
+        </div>
+        <div id="input-container">
+            <button id="voice-input" onclick="startVoiceInput()">
+                <i class="fas fa-microphone-alt"></i>
+            </button>
+            <input type="text" id="user-input" placeholder="Write your message..." onkeydown="handleKeyPress(event)">
+            <button id="send-button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById('user-input');
+            const userMessage = input.value;
+            if (!userMessage) return;
+            input.value = '';
+
+            const userMessageElement = document.createElement('div');
+            userMessageElement.className = 'message user';
+            userMessageElement.innerHTML = `<span>${userMessage}</span>`;
+            document.getElementById('messages').appendChild(userMessageElement);
+            scrollToBottom();
+
+            const botMessageElement = document.createElement('div');
+            botMessageElement.className = 'message bot';
+            botMessageElement.innerHTML = `<span class="loading-spinner"></span><i class="fas fa-robot icon"></i><span id="bot-text-${Date.now()}"></span>`;
+            document.getElementById('messages').appendChild(botMessageElement);
+            const botTextElement = botMessageElement.querySelector(`#bot-text-${Date.now()}`);
+            scrollToBottom();
+
+            try {
+                const response = await fetch('/api/chat/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `message=${encodeURIComponent(userMessage)}`
+                });
+
+                const data = await response.json();
+                botMessageElement.querySelector('.loading-spinner').remove();
+                typingEffect(data.response, botTextElement);
+            } catch (error) {
+                console.error("Error:", error);
+                botTextElement.textContent = "Sorry, something went wrong. Please try again.";
+                botMessageElement.querySelector('.loading-spinner').remove();
+            }
+        }
+
+        function typingEffect(text, element) {
+            let i = 0;
+            const speed = 20;
+            const urlRegex = /(https?:\/\/[^\s\]]+[^\s.,;:!?)\]]*[^\s.,;:!?)\]])/g;
+            const processedText = text.replace(urlRegex, (match) => {
+                const url = match.replace(/[.,;:!?)]+$/, '');
+                const punctuation = match.slice(url.length);
+                return `<a href="${url}" class="clickable-link" target="_blank">${url}</a>${punctuation}`;
+            });
+            
+            function type() {
+                if (i < processedText.length) {
+                    if (processedText.substring(i).startsWith('<a href=')) {
+                        const endIndex = processedText.indexOf('</a>', i) + 4;
+                        element.innerHTML += processedText.substring(i, endIndex);
+                        i = endIndex;
+                    } else {
+                        element.innerHTML += processedText[i];
+                        i++;
+                    }
+                    setTimeout(type, speed);
+                    scrollToBottom();
+                }
+            }
+        
+            type();
+        }
+
+        function scrollToBottom() {
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function startVoiceInput() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+            recognition.continuous = true;
+
+            recognition.start();
+
+            recognition.onspeechstart = function() {
+                console.log("Speech has been detected.");
+            };
+
+            recognition.onresult = function(event) {
+                const voiceText = event.results[0][0].transcript;
+                document.getElementById('user-input').value = voiceText;
+                sendMessage();
+            };
+
+            recognition.onspeechend = function() {
+                console.log("Speech has stopped.");
+                recognition.stop();
+            };
+
+            recognition.onerror = function(event) {
+                alert('Error occurred in recognition: ' + event.error);
+                console.log('Error: ', event);
+            };
+        }
+    </script>
+</body>
+</html>

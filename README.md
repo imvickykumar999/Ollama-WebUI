@@ -1,5 +1,7 @@
 ## `Ollama` : [Source](https://ollama.com/library/llama3.2)
 
+![image](https://github.com/user-attachments/assets/185197de-e154-4a2d-8a32-057752257b21)
+
     Install:
         curl -fsSL https://ollama.com/install.sh | sh
         

@@ -27,11 +27,15 @@ SECRET_KEY = 'django-insecure-u-2)a4)v^e#$hikl&e1h_5$625t$h56@7@k+sy=o(%)l=i)(e7
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'chatsupport.pythonanywhere.com', 
-    'localhost', 
-    '127.0.0.1',
+    '.pythonanywhere.com', 
     '.vercel.app', 
     '.ngrok-free.app',
+    'localhost', 
+    '127.0.0.1',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.app"
 ]
 
 # Application definition
@@ -81,23 +85,23 @@ WSGI_APPLICATION = 'chat_support.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'neondb',  # Replace with your PostgreSQL database name
-        'USER': 'neondb_owner',  # Replace with your PostgreSQL username
-        'PASSWORD': 'npg_gN1PF9ichujV',  # Replace with your PostgreSQL password
-        'HOST': 'ep-dry-unit-a29urm8q-pooler.eu-central-1.aws.neon.tech',  # Use the server's IP or domain if not localhost
-        'PORT': '5432',  # Default PostgreSQL port
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'neondb',  # Replace with your PostgreSQL database name
+#         'USER': 'neondb_owner',  # Replace with your PostgreSQL username
+#         'PASSWORD': 'npg_gN1PF9ichujV',  # Replace with your PostgreSQL password
+#         'HOST': 'ep-dry-unit-a29urm8q-pooler.eu-central-1.aws.neon.tech',  # Use the server's IP or domain if not localhost
+#         'PORT': '5432',  # Default PostgreSQL port
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

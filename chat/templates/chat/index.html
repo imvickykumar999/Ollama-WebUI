@@ -246,7 +246,7 @@
     <script>
         async function loadChatHistory() {
             try {
-                const response = await fetch('/api/chat/', { method: 'GET' });
+                const response = await fetch('https://free-camel-deadly.ngrok-free.app/api/chat/', { method: 'GET' });
                 const data = await response.json();
         
                 const messagesContainer = document.getElementById('messages');

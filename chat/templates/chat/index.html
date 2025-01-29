@@ -223,12 +223,18 @@
 <body>
     <div id="chat-container">
         <h2>@imvickykumar999 ChatBot</h2>
+
         <div id="messages">
-            <div class="message bot">
-                <i class="fas fa-cogs icon"></i>
-                <span>Hello! How can I assist you today?</span>
-            </div>
+            {% for msg in messages %}
+                <div class="message {% if msg.sender == 'User' %}user{% else %}bot{% endif %}">
+                    {% if msg.sender == 'Bot' %}
+                        <i class="fas fa-cogs icon"></i>
+                    {% endif %}
+                    <span>{{ msg.message }}</span>
+                </div>
+            {% endfor %}
         </div>
+
         <div id="input-container">
             <input type="text" id="user-input" placeholder="Write your message..." onkeydown="handleKeyPress(event)">
             <button id="send-button" onclick="sendMessage()">
@@ -238,6 +244,35 @@
     </div>
 
     <script>
+        async function loadChatHistory() {
+            try {
+                const response = await fetch('/api/chat/', { method: 'GET' });
+                const data = await response.json();
+        
+                const messagesContainer = document.getElementById('messages');
+                messagesContainer.innerHTML = ''; // Clear previous messages
+        
+                data.messages.forEach(msg => {
+                    const messageElement = document.createElement('div');
+                    messageElement.className = `message ${msg.sender === 'User' ? 'user' : 'bot'}`;
+        
+                    if (msg.sender === 'Bot') {
+                        messageElement.innerHTML = `<i class="fas fa-cogs icon"></i>`;
+                    }
+        
+                    messageElement.innerHTML += `<span>${msg.message}</span>`;
+                    messagesContainer.appendChild(messageElement);
+                });
+        
+                scrollToBottom();
+            } catch (error) {
+                console.error('Error loading chat history:', error);
+            }
+        }
+        
+        // Load messages when the page loads
+        window.onload = loadChatHistory;
+        
         async function sendMessage() {
             const input = document.getElementById('user-input');
             const userMessage = input.value;

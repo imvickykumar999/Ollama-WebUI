@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -90,11 +89,14 @@ WSGI_APPLICATION = 'chat_support.wsgi.application'
 # }
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        "postgres://neondb_owner:npg_df86WeZCLOxD@ep-dawn-dream-a22k8i4s-pooler.eu-central-1.aws.neon.tech/neondb?sslmode=require",
-        conn_max_age=600,  # Connection pooling
-        ssl_require=True   # Ensures secure connection
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'neondb',  # Replace with your PostgreSQL database name
+        'USER': 'neondb_owner',  # Replace with your PostgreSQL username
+        'PASSWORD': 'npg_gN1PF9ichujV',  # Replace with your PostgreSQL password
+        'HOST': 'ep-dry-unit-a29urm8q-pooler.eu-central-1.aws.neon.tech',  # Use the server's IP or domain if not localhost
+        'PORT': '5432',  # Default PostgreSQL port
+    }
 }
 
 # Password validation

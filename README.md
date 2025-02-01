@@ -2,10 +2,16 @@
 
 ```bash
 python manage.py runserver
+ngrok http --url=free-camel-deadly.ngrok-free.app 8000
 
+# in seperate terminal
 ollama serve
 
-ngrok http --url=free-camel-deadly.ngrok-free.app 8000
+python app.py
+python generate.py
+
+ollama create blogforge -f ./Modelfile
+OLLAMA_USE_CUDA=1 ollama run blogforge
 ```
 
 ## Ollama : [Source](https://ollama.com/library/llama3.2)

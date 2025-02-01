@@ -220,7 +220,22 @@
         }
     </style>
 </head>
+
 <body>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/6784af2faf5bfec1dbeaa4c4/1ihf4olbi';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+
     <div id="chat-container">
         <h2>@imvickykumar999 ChatBot</h2>
 
@@ -320,7 +335,10 @@
         function typingEffect(text, element) {
             let i = 0;
             const speed = 20;
-            const urlRegex = /(https?:\/\/[^\s\]]+[^\s.,;:!?)\]]*[^\s.,;:!?)\]])/g;
+
+            //const urlRegex = /(https?:\/\/[^\s\]]+[^\s.,;:!?)\]]*[^\s.,;:!?)\]])/g;
+            const urlRegex = /(https?:\/\/[^\s]+)/g;
+
             const processedText = text.replace(urlRegex, (match) => {
                 const url = match.replace(/[.,;:!?)]+$/, '');
                 const punctuation = match.slice(url.length);

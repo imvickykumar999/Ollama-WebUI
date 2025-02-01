@@ -28,7 +28,7 @@ def chat_api(request):
 
         try:
             process = subprocess.Popen(
-                ["ollama", "run", "llama3.2"],
+                ["ollama", "run", "blogforge"],
                 stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,

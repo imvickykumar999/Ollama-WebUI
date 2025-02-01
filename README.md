@@ -1,7 +1,7 @@
 # Quick Start
 
 ```bash
-python manage.py  runserver
+python manage.py runserver
 
 ollama serve
 

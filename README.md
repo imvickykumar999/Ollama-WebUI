@@ -38,14 +38,15 @@ More:
 ## WebUI : [Blog](https://readmedium.com/geek-out-time-build-your-own-autonomous-ai-agent-backed-by-the-top-open-source-llm-deepseek-v3-and-9d04820f8f6d)
 
 ```bash
-Install:
-    git clone https://github.com/browser-use/web-ui.git
-    cd web-ui
-    cp .env.example .env
-    sudo snap install astral-uv --classic
-    uv pip install -r requirements.txt
-    playwright install
-
-Run:
-    python webui.py --ip 127.0.0.1 --port 7788
+sha256sum Anaconda3-2024.10-1-Linux-x86_64.sh
+bash Anaconda3-2024.10-1-Linux-x86_64.sh
+source ~/.bashrc
+conda init
+git clone https://github.com/browser-use/web-ui.git
+cd web-ui/
+conda info --env
+conda activate base
+pip install -r  requirements.txt
+playwright install
+python webui.py --ip 127.0.0.1 --port 7788
 ```

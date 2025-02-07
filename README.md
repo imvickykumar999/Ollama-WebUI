@@ -1,4 +1,4 @@
-# Quick Start
+# `Quick Start`
 
 ```bash
 python manage.py runserver
@@ -14,7 +14,11 @@ ollama create blogforge -f ./Modelfile
 OLLAMA_USE_CUDA=1 ollama run blogforge
 ```
 
-## Ollama : [Source](https://ollama.com/library/llama3.2)
+>## `Custom Model`
+>
+>![image](https://github.com/user-attachments/assets/0049f332-f543-4d17-8edb-5898ac531bd4)
+
+## `Ollama` : [`Source`](https://ollama.com/library/llama3.2)
 
 ```bash
 Install:

@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import ChatMessage
 import subprocess
+import os
 
 def chat_page(request):
     messages = ChatMessage.objects.all().order_by('timestamp')  # Load all messages in order

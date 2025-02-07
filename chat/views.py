@@ -34,6 +34,7 @@ def chat_api(request):
                 stderr=subprocess.PIPE,
                 encoding="utf-8",
                 text=True,
+                env={**os.environ, "OLLAMA_USE_CUDA": "1"}
             )
             stdout, stderr = process.communicate(input=user_message)
 

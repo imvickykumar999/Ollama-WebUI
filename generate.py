@@ -10,7 +10,7 @@ with open(output_file, "w", encoding="utf-8") as outfile:
     outfile.write("# set the temperature to 1 [higher is more creative, lower is more coherent]\n")
     outfile.write("PARAMETER temperature 1\n\n")
     outfile.write("# set the system message\n")
-    outfile.write("SYSTEM \"\n")
+    outfile.write("SYSTEM \"\"\"\n")
     
     # Iterate through markdown files and append content
     for filename in os.listdir(directory):

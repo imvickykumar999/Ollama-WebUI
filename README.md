@@ -42,6 +42,7 @@ More:
 ## WebUI : [Blog](https://readmedium.com/geek-out-time-build-your-own-autonomous-ai-agent-backed-by-the-top-open-source-llm-deepseek-v3-and-9d04820f8f6d)
 
 ```bash
+wget https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
 sha256sum Anaconda3-2024.10-1-Linux-x86_64.sh
 bash Anaconda3-2024.10-1-Linux-x86_64.sh
 source ~/.bashrc
